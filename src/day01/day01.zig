@@ -8,7 +8,6 @@ const Rotation = union(enum) {
 
 const Day01ParseError = error{
     InvalidRotation,
-    NoValue,
 };
 
 const start_position: isize = 50;
