@@ -25,6 +25,7 @@ pub fn solve(allocator: std.mem.Allocator) !void {
     std.debug.print("Day 01:\n", .{});
 
     solve_part1(list);
+    solve_part2(list);
 
     std.debug.print("\n", .{});
 }
@@ -61,6 +62,52 @@ fn solve_part1(list: []Rotation) void {
     }
 
     std.debug.print("\tPart 1: {}\n", .{number_of_zeros});
+}
+
+fn solve_part2(list: []Rotation) void {
+    var position = start_position;
+    var number_of_zeros: isize = 0;
+
+    for (list) |rotation| {
+        const loop_start_position = position;
+
+        switch (rotation) {
+            .left => |value| {
+                number_of_zeros += @divFloor(value, 100);
+                position -= @rem(value, 100);
+            },
+            .right => |value| {
+                number_of_zeros += @divFloor(value, 100);
+                position += @rem(value, 100);
+            },
+        }
+
+        if (position < 0) {
+            if (loop_start_position != 0) {
+                number_of_zeros += 1;
+            }
+
+            position += 100;
+        }
+
+        if (position > 100) {
+            if (loop_start_position != 0) {
+                number_of_zeros += 1;
+            }
+
+            position -= 100;
+        }
+
+        if (position == 100) {
+            position = 0;
+        }
+
+        if (position == 0) {
+            number_of_zeros += 1;
+        }
+    }
+
+    std.debug.print("\tPart 2: {}\n", .{number_of_zeros});
 }
 
 fn parse_content(content: []u8, allocator: std.mem.Allocator) ![]Rotation {
