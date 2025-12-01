@@ -41,7 +41,7 @@ fn create_module(
 
 fn executable_compile(b: *std.Build, target: ResolvedTarget, optimize: OptimizeMode) *Compile {
     return b.addExecutable(.{
-        .name = "AOC2021",
+        .name = "AOC2025",
         .root_module = b.createModule(.{
             .root_source_file = b.path("src/main.zig"),
             .target = target,
