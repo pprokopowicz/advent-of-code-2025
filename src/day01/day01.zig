@@ -112,6 +112,7 @@ fn solve_part2(list: []Rotation) void {
 fn parse_content(content: []u8, allocator: std.mem.Allocator) ![]Rotation {
     var it = std.mem.splitSequence(u8, content, "\n");
     var list = std.ArrayList(Rotation).empty;
+    errdefer list.deinit(allocator);
 
     while (it.next()) |line| {
         if (line.len == 0) continue;
