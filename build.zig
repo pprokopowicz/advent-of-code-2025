@@ -6,6 +6,7 @@ const Compile = std.Build.Step.Compile;
 
 const FILE_READER_NAME = "file_reader";
 const DAY01_NAME = "day01";
+const DAY02_NAME = "day02";
 
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
@@ -13,12 +14,15 @@ pub fn build(b: *std.Build) void {
 
     const file_reader = create_module(b, target, optimize, FILE_READER_NAME, "src/file-reader/file_reader.zig");
     const day01 = create_module(b, target, optimize, DAY01_NAME, "src/day01/day01.zig");
+    const day02 = create_module(b, target, optimize, DAY02_NAME, "src/day02/day02.zig");
 
     day01.addImport(FILE_READER_NAME, file_reader);
+    day02.addImport(FILE_READER_NAME, file_reader);
 
     const exe = executable_compile(b, target, optimize);
 
     exe.root_module.addImport(DAY01_NAME, day01);
+    exe.root_module.addImport(DAY02_NAME, day02);
 
     b.installArtifact(exe);
 
