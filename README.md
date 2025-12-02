@@ -17,3 +17,4 @@ foo@bar:~$ zig build run
 ## Days
 
 - [01 - Secret Entrance](src/day01)
+- [02 - Gift Shop](src/day02)
