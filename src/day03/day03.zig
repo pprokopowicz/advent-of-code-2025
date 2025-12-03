@@ -29,37 +29,30 @@ pub fn solve(allocator: std.mem.Allocator) !void {
 }
 
 fn solve_part1(list: [][]u8) void {
-    var sum: usize = 0;
-
-    for (list) |bank| {
-        const first_max = maximum(bank[0 .. bank.len - 1]);
-        const second_max = maximum(bank[first_max.index + 1 ..]);
-        sum += first_max.value * 10 + second_max.value;
-    }
-
-    std.debug.print("\tPart 1: {}\n", .{sum});
+    std.debug.print("\tPart 1: {}\n", .{maximum_joltages(list, 2)});
 }
 
 fn solve_part2(list: [][]u8) void {
+    std.debug.print("\tPart 2: {}\n", .{maximum_joltages(list, 12)});
+}
+
+fn maximum_joltages(list: [][]u8, number_of_batteries: usize) usize {
     var sum: usize = 0;
 
     for (list) |bank| {
         var first_available_index: usize = 0;
-        var inner_sum: usize = 0;
 
-        for (0..12) |i| {
-            const last_available_index = bank.len - (12 - i - 1);
+        for (0..number_of_batteries) |i| {
+            const last_available_index = bank.len - (number_of_batteries - i - 1);
             const max = maximum(bank[first_available_index..last_available_index]);
 
             first_available_index += max.index + 1;
 
-            inner_sum += max.value * std.math.pow(usize, 10, 12 - 1 - i);
+            sum += max.value * std.math.pow(usize, 10, number_of_batteries - 1 - i);
         }
-
-        sum += inner_sum;
     }
 
-    std.debug.print("\tPart 2: {}\n", .{sum});
+    return sum;
 }
 
 fn maximum(list: []u8) Maximum {
