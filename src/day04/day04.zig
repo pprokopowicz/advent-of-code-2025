@@ -86,21 +86,21 @@ fn solve_part2(list: [][]Location) void {
 fn is_location_accessible(list: [][]Location, x: usize, y: usize, max_x: usize, max_y: usize) bool {
     var number_of_papers: usize = 0;
 
-    if (x > 0 and y > 0) {
-        if (list[y - 1][x - 1] == Location.paper) {
-            number_of_papers += 1;
-        }
-    }
-
     if (y > 0) {
         if (list[y - 1][x] == Location.paper) {
             number_of_papers += 1;
         }
-    }
 
-    if (x + 1 <= max_x and y > 0) {
-        if (list[y - 1][x + 1] == Location.paper) {
-            number_of_papers += 1;
+        if (x > 0) {
+            if (list[y - 1][x - 1] == Location.paper) {
+                number_of_papers += 1;
+            }
+        }
+
+        if (x + 1 <= max_x) {
+            if (list[y - 1][x + 1] == Location.paper) {
+                number_of_papers += 1;
+            }
         }
     }
 
@@ -116,21 +116,21 @@ fn is_location_accessible(list: [][]Location, x: usize, y: usize, max_x: usize, 
         }
     }
 
-    if (x > 0 and y + 1 <= max_y) {
-        if (list[y + 1][x - 1] == Location.paper) {
-            number_of_papers += 1;
-        }
-    }
-
     if (y + 1 <= max_y) {
         if (list[y + 1][x] == Location.paper) {
             number_of_papers += 1;
         }
-    }
 
-    if (x + 1 <= max_x and y + 1 <= max_y) {
-        if (list[y + 1][x + 1] == Location.paper) {
-            number_of_papers += 1;
+        if (x > 0) {
+            if (list[y + 1][x - 1] == Location.paper) {
+                number_of_papers += 1;
+            }
+        }
+
+        if (x + 1 <= max_x) {
+            if (list[y + 1][x + 1] == Location.paper) {
+                number_of_papers += 1;
+            }
         }
     }
 
