@@ -19,3 +19,4 @@ foo@bar:~$ zig build run
 - [01 - Secret Entrance](src/day01)
 - [02 - Gift Shop](src/day02)
 - [03 - Lobby](src/day03)
+- [04 - Printing Department](src/day04)
