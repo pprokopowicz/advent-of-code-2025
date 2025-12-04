@@ -1,5 +1,5 @@
 const std = @import("std");
-const day03 = @import("day03");
+const day04 = @import("day04");
 
 pub fn main() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
@@ -7,5 +7,5 @@ pub fn main() !void {
 
     const allocator = gpa.allocator();
 
-    try day03.solve(allocator);
+    try day04.solve(allocator);
 }
