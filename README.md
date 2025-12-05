@@ -20,3 +20,4 @@ foo@bar:~$ zig build run
 - [02 - Gift Shop](src/day02)
 - [03 - Lobby](src/day03)
 - [04 - Printing Department](src/day04)
+- [05 - Cafeteria](src/day05)

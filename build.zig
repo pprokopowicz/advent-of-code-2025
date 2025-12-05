@@ -9,6 +9,7 @@ const DAY01_NAME = "day01";
 const DAY02_NAME = "day02";
 const DAY03_NAME = "day03";
 const DAY04_NAME = "day04";
+const DAY05_NAME = "day05";
 
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
@@ -19,11 +20,13 @@ pub fn build(b: *std.Build) void {
     const day02 = create_module(b, target, optimize, DAY02_NAME, "src/day02/day02.zig");
     const day03 = create_module(b, target, optimize, DAY03_NAME, "src/day03/day03.zig");
     const day04 = create_module(b, target, optimize, DAY04_NAME, "src/day04/day04.zig");
+    const day05 = create_module(b, target, optimize, DAY04_NAME, "src/day05/day05.zig");
 
     day01.addImport(FILE_READER_NAME, file_reader);
     day02.addImport(FILE_READER_NAME, file_reader);
     day03.addImport(FILE_READER_NAME, file_reader);
     day04.addImport(FILE_READER_NAME, file_reader);
+    day05.addImport(FILE_READER_NAME, file_reader);
 
     const exe = executable_compile(b, target, optimize);
 
@@ -31,6 +34,7 @@ pub fn build(b: *std.Build) void {
     exe.root_module.addImport(DAY02_NAME, day02);
     exe.root_module.addImport(DAY03_NAME, day03);
     exe.root_module.addImport(DAY04_NAME, day04);
+    exe.root_module.addImport(DAY05_NAME, day05);
 
     b.installArtifact(exe);
 
