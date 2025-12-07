@@ -28,7 +28,7 @@ pub fn solve(allocator: std.mem.Allocator) !void {
         allocator.free(homework2.operations);
     }
 
-    std.debug.print("Day 05:\n", .{});
+    std.debug.print("Day 06:\n", .{});
 
     solve_part1(homework);
     solve_part2(homework2);
