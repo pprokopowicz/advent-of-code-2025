@@ -22,3 +22,4 @@ foo@bar:~$ zig build run
 - [04 - Printing Department](src/day04)
 - [05 - Cafeteria](src/day05)
 - [06 - Trash Compactor](src/day06)
+- [07 - Laboratories](src/day07)
