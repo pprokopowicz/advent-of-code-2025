@@ -86,32 +86,14 @@ fn solve_part2(manifold: Manifold, allocator: std.mem.Allocator) !void {
                 .empty => {
                     const next = Coordinates{ .x = x, .y = y };
 
-                    if (next_beam_coordinates.contains(next)) {
-                        const next_amount = next_beam_coordinates.get(next).?;
-                        try next_beam_coordinates.put(next, current_amount + next_amount);
-                    } else {
-                        try next_beam_coordinates.put(next, current_amount);
-                    }
+                    try check_next_coordinate(next, &next_beam_coordinates, current_amount);
                 },
                 .splitter => {
                     const left = Coordinates{ .x = x - 1, .y = y };
                     const right = Coordinates{ .x = x + 1, .y = y };
 
-                    if (next_beam_coordinates.contains(left)) {
-                        const left_amount = next_beam_coordinates.get(left).?;
-
-                        try next_beam_coordinates.put(left, current_amount + left_amount);
-                    } else {
-                        try next_beam_coordinates.put(left, current_amount);
-                    }
-
-                    if (next_beam_coordinates.contains(right)) {
-                        const right_amount = next_beam_coordinates.get(right).?;
-
-                        try next_beam_coordinates.put(right, current_amount + right_amount);
-                    } else {
-                        try next_beam_coordinates.put(right, current_amount);
-                    }
+                    try check_next_coordinate(left, &next_beam_coordinates, current_amount);
+                    try check_next_coordinate(right, &next_beam_coordinates, current_amount);
                 },
             }
         }
@@ -128,4 +110,13 @@ fn solve_part2(manifold: Manifold, allocator: std.mem.Allocator) !void {
     }
 
     std.debug.print("\tPart 2: {}\n", .{sum});
+}
+
+fn check_next_coordinate(coordinates: Coordinates, next_coordinates: *std.AutoHashMap(Coordinates, usize), current_amount: usize) !void {
+    if (next_coordinates.contains(coordinates)) {
+        const next_amount = next_coordinates.get(coordinates).?;
+        try next_coordinates.put(coordinates, current_amount + next_amount);
+    } else {
+        try next_coordinates.put(coordinates, current_amount);
+    }
 }
