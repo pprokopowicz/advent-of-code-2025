@@ -75,12 +75,12 @@ fn solve_part2(manifold: Manifold, allocator: std.mem.Allocator) !void {
 
     for (manifold.diagram, 0..) |locations, y| {
         var next_beam_coordinates = std.AutoHashMap(Coordinates, usize).init(allocator);
-        var it = beam_coordinates.keyIterator();
+        var it = beam_coordinates.iterator();
 
-        while (it.next()) |coordinate| {
-            const x = coordinate.x;
+        while (it.next()) |entry| {
+            const x = entry.key_ptr.*.x;
+            const current_amount = entry.value_ptr.*;
             const next_position = locations[x];
-            const current_amount = beam_coordinates.get(coordinate.*).?;
 
             switch (next_position) {
                 .empty => {
